@@ -1,0 +1,76 @@
+Redirecionamentos com > , >> e |
+> - sobrescreve o arquivo
+>> - adiciona ao final do arquivo
+| - Saída do primeiro comando serve de antrada para outro.
+
+dir >> lista_arquivos.txt
+dir /s | more
+dir | sort /r  (ordenará por data pois conta a partir do primeiro caractere da linha)
+
+============================================
+
+BATCH SCRIPT:
+Criação de arquivos de lote (extensão .BAT ou .CMD)
+REM isso é um comentário
+@echo off REM (desabilita a saída de mensagens dos comandos)
+title REM (muda o nome da barra de titulos)
+echo REM (escreve na tela)
+echo. REM (pula linha)
+pause 
+timeout /t "segundos"
+start comando
+choice Rem (comando que gera errolevel)
+
+Variável de ambiente %ERRORLEVEL%
+Retorna o status do último comando (zero , programa rodou sem erros)
+
+====================================
+
+Exemplos de scripts:
+
+1) parametros.bat
+REM é possível receber até 9 parâmetros - %1% a %9%
+@echo off
+echo %1% rem primeiro parâmetro passado pela linha de comando
+echo %2% rem segundo parâmetro passado pela linha de comando
+echo %3% rem terceiro parâmetro passado pela linha de comando
+echo %4% rem quarto parâmetro passado pela linha de comando
+echo.
+echo %0 rem nome do script
+timeout /t 5 
+rem uso: parametros Jesus Jose Maria Burrinho 
+
+2) menu.bat
+@echo off
+title menu em batch script
+Rem isto é um comentário
+mode 80,30
+color 2e
+:inicio
+echo                  #============================#
+echo                  #    MENU PRINCIPAL          #
+echo                  #1 Backup de Sistema         #
+echo                  #2 Exportar tabelas do banco #
+echo                  #S Sair                      #
+echo                  #============================#
+
+echo. 
+echo.
+choice /c 12s /t 10 /d s  /m "Escolha uma opcao.:" 
+rem /c define as opcoes 1, 2 e S; /t 10 da 10 segundos; /d opcao default é a s; /m mensagem a ser exibida.
+if %errorlevel%==3 goto :sair
+if %errorlevel%==2 goto :exportar
+if %errorlevel%==1 goto :backup
+
+:backup
+echo rotina de backup iniciada
+goto inicio
+
+:exportar
+echo rotina de exportacao iniciada
+goto inicio
+
+:sair
+echo fim
+
+======================================================
