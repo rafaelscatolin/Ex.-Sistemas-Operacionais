@@ -74,3 +74,43 @@ goto inicio
 echo fim
 
 ======================================================
+
+
+
+
+Exercícios
+
+1) Você trabalha em uma empresa de desenvolvimento web.
+A empresa trabalha sobre um template inicial que segue:
+|-projectName
+    |-scripts
+        |- client
+        |- server
+    |-css
+    |-media
+        |-images
+        |-videos
+        |-sounds
+    |-index.html
+
+crie um script initweb.bat que receba por parâmetro o nome do projeto e 
+crie a árvore acima. "projectName" deve ser substituído pelo nome 
+passado por parâmetro.
+
+
+@echo woff
+rem Inicia a estrutura de um projeto de website
+title Projeto web
+echo Inicindo estrutura basica
+mkdir %1
+md %1\css %1\scripts  %1\media 
+md %1\scripts\client %1\scripts\server %1\media\videos %1\media\sounds %1\media\images
+echo "" > %1\index.html
+tree /a > arvore-Projeto-%1.txt
+echo Projeto %1 Criado
+timeout /t 5
+start .
+
+
+
+
