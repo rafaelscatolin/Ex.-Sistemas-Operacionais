@@ -110,7 +110,50 @@ tree /a > arvore-Projeto-%1.txt
 echo Projeto %1 Criado
 timeout /t 5
 start .
+================================================================================================================
+================================================================================================================
+================================================================================================================
+
+Escreva o script relat.bat para que crie um relatório incremental, ou seja,
+o arquivo gerado pelo relatório é sempre atualizado sem apagar os
+relatórios anteriores.
+O relatório deve sempre iniciar com um cabeçalho constando data e hora
+em que foi gerado (date /t e time /t ou variáveis %DATE% e %TIME%) e um traço com caracteres "=" para
+separar um relatório de outro.
+As informações que devem constar no arquivo são (além dos cabeçalhos):
+* Usuário que está logadosey
+* Versão do Sistema Operacional
+* Número de Processadores
+* Lista de variáveis de ambiente.
+* Lista de arquivos .c e .cpp do home do usuário
+
+O relatório deve ser salvo em home do usuário\desktop\relatorio.txt
 
 
+rem relat.bat:
+@echo off
+cls
+set SALVAR=%SYSTEMDRIVE%%HOMEPATH%\Desktop
+echo Gerando relatorio
+echo.
+echo =========================== >> %SALVAR%\relatorio.txt
+echo * Inicio de relatorio >> %SALVAR%\relatorio.txt
+echo * %DATE% %TIME% >> %SALVAR%\relatorio.txt
+echo =========================== >> %SALVAR%\relatorio.txt
+echo Usuario em uso: %USERNAME% >> %SALVAR%\relatorio.txt
+ver >> %SALVAR%\relatorio.txt
+echo Numero de processadores: %NUMBER_OF_PROCESSORS% >> %SALVAR%\relatorio.txt
+echo Lista de Variaveis de ambiente deste PC: >> %SALVAR%\relatorio.txt
+set >> %SALVAR%\relatorio.txt
+echo. >> %SALVAR%\relatorio.txt
+echo Lista de arquivos .c e .cpp do %USERNAME% >> %SALVAR%\relatorio.txt
+::dir %SYSTEMDRIVE%%HOMEPATH%\.c %SYSTEMDRIVE%%HOMEPATH%\*.cpp /s >> %SALVAR%\relatorio.txt
+dir %SYSTEMDRIVE%%HOMEPATH%\.c %SYSTEMDRIVE%%HOMEPATH%\*.cpp /s | find /i ".c" >> %SALVAR%\relatorio.txt
+echo. >> %SALVAR%\relatorio.txt
+echo ========================================================== >> %SALVAR%\relatorio.txt
+echo. >> %SALVAR%\relatorio.txt
+echo. >> %SALVAR%\relatorio.txt
+echo Relatorio gerado
+timeout /t 5
 
 
